@@ -137,7 +137,7 @@ p {
 }
 
 .accent-tile {
-    min-height: calc(30vh - 20px);
+    height: calc(30vh - 20px);
 }
 
 #dashboard-charts a {
@@ -180,7 +180,7 @@ p {
     }
 
     #dashboard-charts {
-        min-height: 72vh;
+        min-height: 75vh;
         margin: 1em 0;
     }
 
@@ -188,7 +188,7 @@ p {
 
     #dashboard-charts>.big-tile {
         width: calc(100% - 10px);
-        height: 26vh;
+        height: 30vh;
     }
 
     #dashboard-charts>.normal-tile {

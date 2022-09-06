@@ -47,6 +47,10 @@ export default function App() {
     }).catch(err => { console.log(err); })
   }
 
+  React.useEffect(() => {
+    localStorage.setItem('mode', mode)
+  }, [mode]);
+
 
   const colorMode = React.useMemo(
     () => ({
@@ -55,7 +59,7 @@ export default function App() {
         setMode((prevMode) =>
           prevMode === 'light' ? 'dark' : 'light',
         );
-        localStorage.setItem('mode', mode)
+        // localStorage.setItem('mode', mode)
       },
     }),
     [],
@@ -78,7 +82,7 @@ export default function App() {
         <CssBaseline />
         <MainPage authors={authors} loadingAuthors={loadingAuthors} onAuthorSubmit={onAuthorSubmit} />
         <IconButton style={{ position: "absolute", top: 10, right: 10 }} onClick={colorMode.toggleColorMode} aria-label="delete">
-          {mode == 'light' ? <BedtimeIcon /> : <LightModeIcon />}
+          {mode === 'light' ? <BedtimeIcon /> : <LightModeIcon />}
         </IconButton>
       </ThemeProvider>
     </ColorModeContext.Provider>

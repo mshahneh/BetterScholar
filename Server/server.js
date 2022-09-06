@@ -74,7 +74,7 @@ MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     for (var i = 0; i < result.length; i++) {
       author_id = result[i].id;
-      console.log("author id", author_id);
+      // console.log("author id", author_id);
     }
     db.close();
   });
@@ -85,12 +85,12 @@ function getPeople() {
   return new Promise(function (myResolve, myReject) {
     MongoClient.connect(url, function (err, db) {
       if (err) myReject(err);;
-      console.log("and here");
+      // console.log("and here");
       var dbo = db.db(dbname);
       dbo.collection("people").find({}).toArray(function (err, result) {
         if (err) myReject(err);;
         db.close();
-        console.log(result)
+        // console.log(result)
         myResolve(result);
       });
     });
@@ -137,7 +137,7 @@ function updateDataset(data, res) {
         }
       }
       dbo.collection("articles").replaceOne({ "id": data.search_parameters.author_id }, articleObject, { upsert: true })
-      console.log("fiexed articles object");
+      // console.log("fiexed articles object");
     });
 
 
@@ -174,7 +174,7 @@ function updateDataset(data, res) {
       }
       else {
         //update detailed
-        console.log("in else!")
+        // console.log("in else!")
         peopleObj["detailed"].push({
           "date": Date.now(),
           "cites": data.cited_by.table[0].citations.all,
@@ -182,10 +182,10 @@ function updateDataset(data, res) {
           "h_index": data.cited_by.table[1].h_index.all,
           "contributions": getContributions(articleObject.articles),
         });
-        console.log("updated peopleOBj", peopleObj)
+        // console.log("updated peopleOBj", peopleObj)
       }
       dbo.collection("people").replaceOne({ "id": data.search_parameters.author_id }, peopleObj, { upsert: true })
-      console.log("fiexed people object");
+      // console.log("fiexed people object");
     });
 
     if (res !== undefined) {
@@ -210,12 +210,12 @@ app.get('/api/adduser/:username', function (req, res) {
 
 
 app.get('/api/users', function (req, res) {
-  console.log("here");
+  // console.log("here");
   getPeople().then(value => res.send(value))
 })
 
 app.get('/api/publications/:username', function (req, res) {
-  console.log("in get publications");
+  // console.log("in get publications");
   MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     var dbo = db.db(dbname);
@@ -224,7 +224,7 @@ app.get('/api/publications/:username', function (req, res) {
     //update articles collection
     dbo.collection("articles").find({ "id": req.params.username }).toArray(function (err, result) {
       if (err) console.log(err);
-      console.log(result)
+      // console.log(result)
       db.close();
       res.send(result);
     })
@@ -235,16 +235,16 @@ app.get('/api/publications/:username', function (req, res) {
 
 var rule = new schedule.RecurrenceRule();
 rule.month = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-rule.date = [8, 23];
-rule.hour = 13;
+rule.date = [6, 21];
+rule.hour = 1;
 rule.minute = 0;
 rule.second = 0;
 
 var j = schedule.scheduleJob(rule, function () {
-  console.log("in schedule")
+  // console.log("in schedule")
   getPeople().then(authors => {
     for (let i = 0; i < authors.length; i++) {
-      console.log(authors[i].id + " " + authors[i].name)
+      // console.log(authors[i].id + " " + authors[i].name)
       let tempParams = params;
       tempParams.author_id = authors[i].id;
 

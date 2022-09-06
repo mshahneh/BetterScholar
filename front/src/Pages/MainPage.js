@@ -9,7 +9,6 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton } from '@mui/material';
-const drawerWidth = 240;
 
 const address = "http://localhost:3006";
 
@@ -94,9 +93,6 @@ export default function MainPage({ authors, loadingAuthors, onAuthorSubmit }) {
   return (
 
     < div className="App" >
-      {
-        console.log('main page', localStorage.getItem('authorsOrder'))
-      }
       <Box
         // component="nav"
         sx={{ margin: { sm: "0" }, width: matches ? "25%" : "0%", flexShrink: { sm: 0 } }}

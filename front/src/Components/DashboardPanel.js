@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./CSS/DashboardPanel.css"
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { AreaChart, LineChart, Line, Legend, Cell, PieChart, Pie, Area, XAxis, YAxis, Tooltip, linearGradient, ResponsiveContainer } from 'recharts';
-import Moment from 'react-moment';
+import { AreaChart, LineChart, Line, Legend, Cell, PieChart, Pie, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTheme } from '@mui/material/styles';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PaperItem from './PaperItem';
 import moment from 'moment';
-import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton } from '@mui/material';
 
 
 export default function DashboardPanel({ author, publications }) {
@@ -29,7 +25,6 @@ export default function DashboardPanel({ author, publications }) {
         alignItems: 'center',
         justifyContent: 'center',
     };
-    const circleSize = 30;
     let most_cited;
     if (publications.length > 0) {
         most_cited = publications[0];
@@ -48,7 +43,7 @@ export default function DashboardPanel({ author, publications }) {
             <div id='dashboard-charts'>
                 <Paper className='big-tile tile' elevation={1}>
                     <h2 style={{ textAlign: "left", marginLeft: "1vw" }}> Cites and Papers </h2>
-                    <ResponsiveContainer width="99%" height="60%">
+                    <ResponsiveContainer width="99%" height="70%">
                         <AreaChart width="100%" data={author.detailed}
                             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <defs>

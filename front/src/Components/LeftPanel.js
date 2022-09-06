@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ListItem from './ListItem';
 import SearchPanel from "./SearchPanel";
 import { useTheme } from '@mui/material/styles';
@@ -6,7 +6,6 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import PulseLoader from "react-spinners/PulseLoader";
 import "./CSS/LeftPanel.css"
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 
 
 let sortingBasedOnOther = (list1, orderList) => {
@@ -29,7 +28,6 @@ export default function LeftPanel({ loadingAuthor, onDragEnd, items, selected, o
     // a little function to help us with reordering the result
 
     const theme = useTheme();
-    console.log("ITEMS", JSON.stringify(items))
     items = sortingBasedOnOther(items, JSON.parse(localStorage.getItem('authorsOrder')));
     // console.log(JSON.stringify(items))
 
@@ -66,7 +64,7 @@ export default function LeftPanel({ loadingAuthor, onDragEnd, items, selected, o
                                                 provided={provided} snapshot={snapshot}
                                                 author={author}
                                                 onAuthorclick={() => onAuthorclick(index)}
-                                                isSelected={author.id == selected ? true : false} />
+                                                isSelected={author.id === selected ? true : false} />
                                         }
                                     </Draggable>)}
                                 {provided.placeholder}
