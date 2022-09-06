@@ -1,0 +1,5 @@
+#search-panel {
+    direction: ltr;
+    display: flex;
+    flex-direction: row;
+}
