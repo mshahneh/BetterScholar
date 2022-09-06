@@ -9,7 +9,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import MainPage from './Pages/MainPage';
 
 
-const address = "http://localhost:3006";
+const address = "https://scholar.mohammad-reza.com/";
 
 export default function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');

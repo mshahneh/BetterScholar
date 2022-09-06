@@ -10,7 +10,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton } from '@mui/material';
 
-const address = "http://localhost:3006";
+const address = "https://scholar.mohammad-reza.com/";
 
 export default function MainPage({ authors, loadingAuthors, onAuthorSubmit }) {
   const theme = useTheme();
