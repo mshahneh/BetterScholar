@@ -4,6 +4,7 @@ var cors = require('cors')
 const mongo = require('mongodb');
 var schedule = require('node-schedule');
 const app = express();
+const path = require("path");
 const mongoose = require("mongoose");
 const search = new SerpApi.GoogleSearch("c96a1f075b4185fb4ff9388cb81ef3e07e0e7dfa83cb1790a7b8356de1fff209");
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -15,7 +16,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 app.use(express.json());
 app.use(cors())
-
+app.use(express.static(path.join(__dirname, '../front/build')));
 
 const params = {
   engine: "google_scholar_author",
@@ -236,15 +237,15 @@ app.get('/api/publications/:username', function (req, res) {
 var rule = new schedule.RecurrenceRule();
 rule.month = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 rule.date = [6, 21];
-rule.hour = 1;
-rule.minute = 0;
+rule.hour = 2;
+rule.minute = 56;
 rule.second = 0;
 
 var j = schedule.scheduleJob(rule, function () {
-  // console.log("in schedule")
+  console.log("in schedule")
   getPeople().then(authors => {
     for (let i = 0; i < authors.length; i++) {
-      // console.log(authors[i].id + " " + authors[i].name)
+      console.log(authors[i].id + " " + authors[i].name)
       let tempParams = params;
       tempParams.author_id = authors[i].id;
 
