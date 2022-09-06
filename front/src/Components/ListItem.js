@@ -14,7 +14,7 @@ export default function ListItem({ snapshot, provided, author, isSelected, onAut
     const theme = useTheme();
     const selected = isSelected ? "selected" : "";
     const selectedStyle = isSelected ? { backgroundColor: theme.palette.background.default } : {};
-    let paperProg = (author.detailed[author.detailed.length - 1].publications - author.detailed[author.detailed.length - 2].publications);
+    let paperProg = (author.detailed[author.detailed.length - 1].total_papers - author.detailed[author.detailed.length - 2].total_papers);
     return (
         <div ref={provided.innerRef}
             {...provided.draggableProps}

@@ -237,8 +237,8 @@ app.get('/api/publications/:username', function (req, res) {
 var rule = new schedule.RecurrenceRule();
 rule.month = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 rule.date = [6, 21];
-rule.hour = 16;
-rule.minute = 26;
+rule.hour = 23;
+rule.minute = 33;
 rule.second = 0;
 
 var j = schedule.scheduleJob(rule, function () {
