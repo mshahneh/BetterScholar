@@ -256,4 +256,6 @@ var j = schedule.scheduleJob(rule, function () {
     }
   })
 });
-app.listen(process.env.port || 3006);
+
+var port = 3007
+app.listen(port, () => console.log(`Listening on ws://localhost:${port}`));
