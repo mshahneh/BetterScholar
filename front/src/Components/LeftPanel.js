@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 let sortingBasedOnOther = (list1, orderList) => {
     if (Object.keys(list1).length === 0) {
 
-        console.log("here in sort");
         return {};
     }
     list1 = list1.sort((a, b) => {
@@ -37,10 +36,12 @@ export default function LeftPanel({ loadingAuthor, onDragEnd, items, selected, o
 
         </Paper> */}
         <SearchPanel onSubmit={onAuthorSubmit} />
-        <div className='listitem' style={{ fontSize: "0.7em", fontWeight: "bold" }}>
-            <p style={{ flex: 1, textAlign: "left" }}>Author</p>
-            <p className='panel-chart' style={{ width: "28%" }}>Growth</p>
-            <p style={{ width: "24%" }}>Cites/Papers</p>
+        <div className='listitem' style={{ backgroundColor: theme.palette.background.darkdefault }}>
+            <img className='listitem_image' style={{ height: 0, opacity: 0 }} alt="image placeholder" />
+            <h4 className="left-panel-author" style={{ textAlign: "left" }}>Author</h4>
+            <h4 className='panel-chart' style={{ width: "20%" }}>Growth</h4>
+            <h4 className='summary_item'>Cite(s)</h4>
+            <h4 className='summary_item'>Paper(s)</h4>
         </div>
         {loadingAuthor ?
             <PulseLoader color={theme.palette.secondary.main} cssOverride={{

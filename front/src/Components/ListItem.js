@@ -1,11 +1,8 @@
 import React from 'react';
 import './CSS/ListItem.css'
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import ArticleIcon from '@mui/icons-material/Article';
+import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { useTheme } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 
 export default function ListItem({ snapshot, provided, author, isSelected, onAuthorclick }) {
@@ -15,6 +12,10 @@ export default function ListItem({ snapshot, provided, author, isSelected, onAut
     const selected = isSelected ? "selected" : "";
     const selectedStyle = isSelected ? { backgroundColor: theme.palette.background.default } : {};
     let paperProg = (author.detailed[author.detailed.length - 1].total_papers - author.detailed[author.detailed.length - 2].total_papers);
+    let citeProg = (author.detailed[author.detailed.length - 1].cites - author.detailed[author.detailed.length - 2].cites);
+    const hasProg = (citeProg > 0 ? "prog" : "#noprog")
+    const citeColor = (citeProg > 0 ? theme.palette.primary.main : theme.palette.secondary.main)
+
     return (
         <div ref={provided.innerRef}
             {...provided.draggableProps}
@@ -22,36 +23,38 @@ export default function ListItem({ snapshot, provided, author, isSelected, onAut
             <div
                 className={'listitem ' + selected} style={selectedStyle} onClick={onAuthorclick}>
 
-                <img className="listitem_image" src={author.picture} />
-                <h3 style={{ flex: 1, textAlign: "left" }}>{author.name.split(" ")[0]}</h3>
+                <img className="listitem_image" src={author.picture} alt="profile photo" />
+                <p className="left-panel-author">{author.name.split(" ")[0]}</p>
 
-                <ResponsiveContainer width="28%" height={70} className="panel-chart">
-                    <LineChart margin={{ top: 0, left: 0, right: 0, bottom: 0 }} width="100%" data={author.detailed.slice(-5)} tick={false} axisLine={false} tickLine={false}>
-                        {/* <YAxis type="number" domain={['dataMin', 'dataMax']} tick={false} axisLine={false} tickLine={false} /> */}
-                        <XAxis dataKey="date" tick={false} axisLine={false} tickLine={false} />
-                        <Line width="100%" dot={false} type="monotone" dataKey="cites" stroke={theme.palette.primary.main} strokeWidth={4} animationDuration={500} />
-                    </LineChart>
+                <ResponsiveContainer width="20%" height={40} className="panel-chart">
+                    <AreaChart width="100%" data={author.detailed.slice(-12)} >
+                        <defs>
+                            <linearGradient id={hasProg} x1="0" y1="0" x2="0.3" y2="1">
+                                <stop offset="5%" stopColor={citeColor} stopOpacity={0.6} />
+                                <stop offset="95%" stopColor={citeColor} stopOpacity={0} />
+                            </linearGradient>
+                        </defs>
+                        <YAxis type="number" hide={true} domain={['dataMin - 1', 'dataMax + 1']} />
+                        <XAxis dataKey="date" scale="time" hide={true} />
+                        <Area width="100%" dot={false} type="monotone" dataKey="cites" stroke={citeColor} strokeWidth={1} animationDuration={500} fill={("url(#" + hasProg + ")")} />
+                    </AreaChart>
                 </ResponsiveContainer>
 
-                <div style={{ width: "24%" }}>
-                    <div className='summary_item'>
-                        <div>
-                            {/* <FormatQuoteIcon /> */}
-                            <p>{author.detailed[author.detailed.length - 1].cites} </p>
-                            <p> /{author.detailed[author.detailed.length - 1].total_papers} </p>
-                        </div>
-                        {/* <ArrowDropUpIcon style={{ marginLeft: "2px", fontSize: "1.2em", color: theme.palette.secondary.main }} /> */}
-                        <p style={{
-                            backgroundColor: theme.palette.secondary.main,
-                            color: theme.palette.secondary.contrastText,
-                            fontSize: "0.9em",
-                            // width: "70%",
-                            padding: "2px 5px",
-                            borderRadius: "3px",
-                        }}>  +{author.detailed[author.detailed.length - 1].cites - author.detailed[author.detailed.length - 2].cites}
-                            /+
-                            {isNaN(paperProg) ? 0 : paperProg} </p>
-                    </div>
+                <div className="summary_item">
+                    <p>{author.detailed[author.detailed.length - 1].cites} </p>
+                    <p style={{
+                        backgroundColor: (citeProg > 0 ? theme.palette.primary.main : theme.palette.secondary.main),
+
+                    }}>  {citeProg === 0 ? 0 : '+' + citeProg}</p>
+                </div>
+
+                <div className="summary_item">
+                    <p> {author.detailed[author.detailed.length - 1].total_papers} </p>
+                    <p style={{
+                        color: (!(isNaN(paperProg) || paperProg === 0) ? theme.palette.primary.main : theme.palette.secondary.main),
+
+                    }}>
+                        +{isNaN(paperProg) ? 0 : paperProg} </p>
 
                 </div>
             </div >

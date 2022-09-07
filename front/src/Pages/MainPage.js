@@ -95,7 +95,7 @@ export default function MainPage({ authors, loadingAuthors, onAuthorSubmit }) {
     < div className="App" >
       <Box
         // component="nav"
-        sx={{ margin: { sm: "0" }, width: matches ? "25%" : "0%", flexShrink: { sm: 0 } }}
+        sx={{ margin: { sm: "0" }, width: matches ? "27%" : "0%", flexShrink: { sm: 0 } }}
       >
         <Drawer
           variant={matches ? "permanent" : "temporary"}
@@ -108,8 +108,10 @@ export default function MainPage({ authors, loadingAuthors, onAuthorSubmit }) {
           sx={{
             margin: { sm: "0" },
             "& .MuiDrawer-paper": {
+              // position: "absolute",
+              border: "none",
               boxSizing: "border-box",
-              width: matches ? "25%" : "85%"
+              width: matches ? "27%" : "85%"
             }
           }}
         >

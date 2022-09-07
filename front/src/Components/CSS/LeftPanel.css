@@ -1,5 +1,7 @@
 #left_panel {
     width: 100%;
+    padding-bottom: 50px;
+    overflow-x: visible;
     /* box-shadow: 1px 0px 3px 1px rgb(221, 221, 221); */
 }
 

@@ -1,4 +1,3 @@
-import { deepOrange, grey } from '@mui/material/colors';
 // import constants from './constants.js';
 
 export const getDesignTokens = (mode) => ({
@@ -20,7 +19,8 @@ export const getDesignTokens = (mode) => ({
         background: {
           panel: '#e8e8e8',
           paper: '#f5f5f5',
-          default: '#eff0f4'
+          default: '#eff0f4',
+          darkdefault: "#dfe0e4"
         },
         text: {
           gray: '#aaa'
@@ -40,7 +40,8 @@ export const getDesignTokens = (mode) => ({
         background: {
           panel: '#414141',
           paper: '#414141',
-          default: '#292929'
+          default: '#292929',
+          darkdefault: "#333"
         },
         text: {
           primary: "#e2e2e2",
